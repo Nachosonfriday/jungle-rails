@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 4 }
   
   def self.authenticate_with_credentials(email, password)    
-    user = User.find_by_email(email)&.authenticate(password)    
+    user = User.find_by_email(email.strip.downcase)&.authenticate(password)    
     if user
       return user
     else
